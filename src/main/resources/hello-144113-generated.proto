@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package com.your.packagename.memcache;
+
+option java_package = "com.your.packagename.memcache";
+option java_multiple_files = true;
+option java_outer_classname = "MemCache";
+
+option go_package = "your git path/git/path";
+
+// import "your/other/common.proto";
+
+message Request {
+    string message = 1;
+    string request_id = 2;
+}
+
+message Reponse {
+    string message = 1;
+    string response_code = 2;
+}
+
+//get 请求参数
+message GetRequest {
+    Request k = 1;
+}
+
+//get 响应参数
+message GetResponse {
+    int32 function_return_result = 1; // 方法返回值
+    Reponse v = 2;
+}
+
+//set 请求参数
+message SetRequest {
+    Request k = 1;
+    Reponse v = 2;
+}
+
+//set 响应参数
+message SetResponse {
+    int32 function_return_result = 1; // 方法返回值
+}
+
+service MemCacheI {
+
+    rpc Get(GetRequest) returns (GetResponse);
+
+    rpc Set(SetRequest) returns (SetResponse);
+}

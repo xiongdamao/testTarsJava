@@ -1,0 +1,28 @@
+module MemCache
+{
+    struct Request
+    {
+        0 require string message;
+        1 require string requestId;
+    };
+
+    struct Reponse
+    {
+        0 require string message;
+        1 require string responseCode;
+    };
+
+
+
+    interface MemCacheI
+    {
+        int get(Request k, out Reponse v);
+
+        int set(Request k, Reponse v);
+    };
+    interface TestObj2
+    {
+        vector<Reponse> get(Request k);
+
+    };
+};
